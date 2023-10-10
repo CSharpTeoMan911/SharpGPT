@@ -13,3 +13,20 @@
 /home/teodor/Desktop/SharpGPT/obj/Debug/net7.0/SharpGPT.pdb
 /home/teodor/Desktop/SharpGPT/obj/Debug/net7.0/SharpGPT.genruntimeconfig.cache
 /home/teodor/Desktop/SharpGPT/obj/Debug/net7.0/ref/SharpGPT.dll
+C:\Users\Teodor Mihail\Source\Repos\SharpGPT\bin\Debug\net7.0\SharpGPT.exe
+C:\Users\Teodor Mihail\Source\Repos\SharpGPT\bin\Debug\net7.0\SharpGPT.deps.json
+C:\Users\Teodor Mihail\Source\Repos\SharpGPT\bin\Debug\net7.0\SharpGPT.runtimeconfig.json
+C:\Users\Teodor Mihail\Source\Repos\SharpGPT\bin\Debug\net7.0\SharpGPT.dll
+C:\Users\Teodor Mihail\Source\Repos\SharpGPT\bin\Debug\net7.0\SharpGPT.pdb
+C:\Users\Teodor Mihail\Source\Repos\SharpGPT\obj\Debug\net7.0\SharpGPT.csproj.AssemblyReference.cache
+C:\Users\Teodor Mihail\Source\Repos\SharpGPT\obj\Debug\net7.0\SharpGPT.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Teodor Mihail\Source\Repos\SharpGPT\obj\Debug\net7.0\SharpGPT.AssemblyInfoInputs.cache
+C:\Users\Teodor Mihail\Source\Repos\SharpGPT\obj\Debug\net7.0\SharpGPT.AssemblyInfo.cs
+C:\Users\Teodor Mihail\Source\Repos\SharpGPT\obj\Debug\net7.0\SharpGPT.csproj.CoreCompileInputs.cache
+C:\Users\Teodor Mihail\Source\Repos\SharpGPT\obj\Debug\net7.0\SharpGPT.dll
+C:\Users\Teodor Mihail\Source\Repos\SharpGPT\obj\Debug\net7.0\refint\SharpGPT.dll
+C:\Users\Teodor Mihail\Source\Repos\SharpGPT\obj\Debug\net7.0\SharpGPT.pdb
+C:\Users\Teodor Mihail\Source\Repos\SharpGPT\obj\Debug\net7.0\SharpGPT.genruntimeconfig.cache
+C:\Users\Teodor Mihail\Source\Repos\SharpGPT\obj\Debug\net7.0\ref\SharpGPT.dll
+C:\Users\Teodor Mihail\Source\Repos\SharpGPT\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\Teodor Mihail\Source\Repos\SharpGPT\obj\Debug\net7.0\SharpGPT.csproj.CopyComplete
