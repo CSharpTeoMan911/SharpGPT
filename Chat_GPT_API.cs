@@ -11,8 +11,8 @@ namespace SharpGPT
         // TO SEND REQUEST TO CHATGPT OVER THE API
         internal class request
         {
-            public string model;
-            public messages[] messages;
+            public string? model;
+            public messages[]? messages;
             public double temperature = 0.5;
         }
 
@@ -22,8 +22,8 @@ namespace SharpGPT
         // CONTENT
         internal class messages
         {
-            public string role;
-            public string content;
+            public string? role;
+            public string? content;
         }
 
 
@@ -35,8 +35,8 @@ namespace SharpGPT
 
         public static async Task<Tuple<Type, string>> Initiate_Chat_GPT(string input)
         {
-            string result = null;
-            Type return_type = null;
+            string? result = null;
+            Type? return_type = null;
 
             // 'HttpClient' OBJECT NEEDED TO SEND HTTP REQUESTS TO THE OPENAI SERVER.
             System.Net.Http.HttpClient api_client = new System.Net.Http.HttpClient();
@@ -52,7 +52,7 @@ namespace SharpGPT
 
                 StringBuilder api_key_StringBuilder = new StringBuilder("Bearer");
                 api_key_StringBuilder.Append(" ");
-                api_key_StringBuilder.Append(Settings_Controller.Settings_Operation(Settings_Controller.Operations.Set_API_Key, String.Empty));
+                api_key_StringBuilder.Append((await Settings_Controller.Settings_Operation(Settings_Controller.Operations.Set_API_Key, String.Empty)));
 
 
                 api_client.DefaultRequestHeaders.Add("Authorization", api_key_StringBuilder.ToString());
@@ -80,12 +80,15 @@ namespace SharpGPT
 
                     try
                     {
-                        JObject json_response = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(await response.Content.ReadAsStringAsync());
+                        JObject? json_response = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(await response.Content.ReadAsStringAsync());
 
-                        Tuple<Type, string> payload_processing_result = API_Payload_Processing(json_response);
+                        if(json_response != null)
+                        {
+                            Tuple<Type, string> payload_processing_result = API_Payload_Processing(json_response);
 
-                        return_type = payload_processing_result.Item1;
-                        result = payload_processing_result.Item2;
+                            return_type = payload_processing_result.Item1;
+                            result = payload_processing_result.Item2;
+                        }
                     }
                     catch
                     {
@@ -170,11 +173,11 @@ namespace SharpGPT
             //
             // [ BEGIN ]
 
-            JToken error = json_response["error"];
+            JToken? error = json_response["error"];
 
             if (error != null)
             {
-                JToken message = error["message"];
+                JToken? message = error["message"];
 
                 if (message != null)
                 {
@@ -202,15 +205,15 @@ namespace SharpGPT
             }
             else
             {
-                JToken choices = json_response["choices"];
+                JToken? choices = json_response["choices"];
 
                 if (choices != null)
                 {
-                    JToken message = choices[0]["message"];
+                    JToken? message = choices[0]["message"];
 
                     if (choices != null)
                     {
-                        JToken content = message["content"];
+                        JToken? content = message["content"];
 
                         if (content != null)
                         {
