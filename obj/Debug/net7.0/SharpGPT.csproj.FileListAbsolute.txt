@@ -1,0 +1,15 @@
+/home/teodor/Desktop/SharpGPT/bin/Debug/net7.0/SharpGPT
+/home/teodor/Desktop/SharpGPT/bin/Debug/net7.0/SharpGPT.deps.json
+/home/teodor/Desktop/SharpGPT/bin/Debug/net7.0/SharpGPT.runtimeconfig.json
+/home/teodor/Desktop/SharpGPT/bin/Debug/net7.0/SharpGPT.dll
+/home/teodor/Desktop/SharpGPT/bin/Debug/net7.0/SharpGPT.pdb
+/home/teodor/Desktop/SharpGPT/obj/Debug/net7.0/SharpGPT.csproj.AssemblyReference.cache
+/home/teodor/Desktop/SharpGPT/obj/Debug/net7.0/SharpGPT.GeneratedMSBuildEditorConfig.editorconfig
+/home/teodor/Desktop/SharpGPT/obj/Debug/net7.0/SharpGPT.AssemblyInfoInputs.cache
+/home/teodor/Desktop/SharpGPT/obj/Debug/net7.0/SharpGPT.AssemblyInfo.cs
+/home/teodor/Desktop/SharpGPT/obj/Debug/net7.0/SharpGPT.csproj.CoreCompileInputs.cache
+/home/teodor/Desktop/SharpGPT/obj/Debug/net7.0/SharpGPT.dll
+/home/teodor/Desktop/SharpGPT/obj/Debug/net7.0/refint/SharpGPT.dll
+/home/teodor/Desktop/SharpGPT/obj/Debug/net7.0/SharpGPT.pdb
+/home/teodor/Desktop/SharpGPT/obj/Debug/net7.0/SharpGPT.genruntimeconfig.cache
+/home/teodor/Desktop/SharpGPT/obj/Debug/net7.0/ref/SharpGPT.dll

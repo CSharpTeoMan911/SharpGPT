@@ -1,0 +1,7 @@
+namespace SharpGPT
+{
+    class Settings
+    {
+        
+    }
+}
