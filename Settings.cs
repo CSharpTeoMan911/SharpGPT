@@ -8,7 +8,7 @@ namespace SharpGPT
 
         private sealed class Application_Settings
         {
-            public string API_KEY;
+            public string? API_KEY;
         }
 
 

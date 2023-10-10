@@ -14,7 +14,7 @@ namespace SharpGPT
             Get_API_Key
         }
 
-        public static async Task<string> Settings_Operation(Operations operation, string parameter)
+        public static async Task<string?> Settings_Operation(Operations operation, string parameter)
         {
             string? return_value = null;
 
