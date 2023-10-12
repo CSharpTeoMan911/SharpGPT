@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XMYYilkp+7jTagcivxZMxSDLnVUypfawiNAA6484mD/Zi6gSIwy7niDH0gP00ma5xzS7nvQe15fjyVz32IDIrA==",
+  "dgSpecHash": "w6Y0FiFQ1SXl526kvbQo1nxL2XVI2Y1G1jZb/fGtMb6R7xc2/+HnS7LUMd1q1yIGS+3uhXlxsI5CI2AzfvM5+A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Teodor Mihail\\Source\\Repos\\SharpGPT\\SharpGPT.csproj",
+  "projectFilePath": "C:\\Users\\Teodor Mihail\\source\\repos\\SharpGPT\\SharpGPT.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Teodor Mihail\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],

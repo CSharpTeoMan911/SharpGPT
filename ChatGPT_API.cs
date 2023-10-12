@@ -1,26 +1,40 @@
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
+using SharpGPT;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace SharpGPT
+
+namespace Eva_5._0
 {
-    class Chat_GPT_API
+    internal class ChatGPT_API
     {
         private static List<messages> cached_conversation = new List<messages>();
+        private static double temperature = 0.5;
+        private static string model = "gpt-3.5-turbo";
+
+
 
         // CLASS THAT IS SERIALIZED IN A JSON FILE FORMAT
         // TO SEND REQUEST TO CHATGPT OVER THE API
+#pragma warning disable CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
         internal class request
+#pragma warning restore CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
         {
             public string? model;
             public messages[]? messages;
-            public double temperature = 0.5;
+            public double temperature;
         }
 
 
         // CLASS THAT IS SERIALIZED WITHIN THE
         // "request" CLASS AS THE MESSAGE
         // CONTENT
+#pragma warning disable CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
         internal class messages
+#pragma warning restore CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
         {
             public string? role;
             public string? content;
@@ -33,61 +47,89 @@ namespace SharpGPT
         }
 
 
-        public static async Task<Tuple<Type, string>> Initiate_Chat_GPT(string input)
+        public static async Task<Tuple<Type?, string?>> Initiate_Chat_GPT(string input)
         {
             string? result = null;
             Type? return_type = null;
 
-            // 'HttpClient' OBJECT NEEDED TO SEND HTTP REQUESTS TO THE OPENAI SERVER.
-            System.Net.Http.HttpClient api_client = new System.Net.Http.HttpClient();
+            string? api_key = await Settings_Controller.Settings_Operation(Settings_Controller.Operations.Get_API_Key, input);
 
-            try
+            if (api_key != null)
             {
-                // IF THE OPERATION COMPLETES WITHOUT ANY ERRORS
-                // THE SET TYPE VALUE WITHIN THE TUPLE IS A
-                // STRING AND THE STRING VALUE IS THE
-                // CHATGPT RESPONSE
-                //
-                // [ BEIGN ]
-
-                StringBuilder api_key_StringBuilder = new StringBuilder("Bearer");
-                api_key_StringBuilder.Append(" ");
-                api_key_StringBuilder.Append((await Settings_Controller.Settings_Operation(Settings_Controller.Operations.Set_API_Key, String.Empty)));
-
-
-                api_client.DefaultRequestHeaders.Add("Authorization", api_key_StringBuilder.ToString());
-
-
-                messages messages = new messages();
-                messages.role = "user";
-                messages.content = input;
-
-                cached_conversation.Add(messages);
-
-                request request = new request();
-                request.model = "gpt-3.5-turbo";
-                request.messages = cached_conversation.ToArray();
-                request.temperature = 0.5;
-
-
-
-
-                System.Net.Http.StringContent message_content = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+                // 'HttpClient' OBJECT NEEDED TO SEND HTTP REQUESTS TO THE OPENAI SERVER.
+                System.Net.Http.HttpClient api_client = new System.Net.Http.HttpClient();
 
                 try
                 {
-                    System.Net.Http.HttpResponseMessage response = await api_client.PostAsync("https://api.openai.com/v1/chat/completions", message_content);
+                    // IF THE OPERATION COMPLETES WITHOUT ANY ERRORS
+                    // THE SET TYPE VALUE WITHIN THE TUPLE IS A
+                    // STRING AND THE STRING VALUE IS THE
+                    // CHATGPT RESPONSE
+                    //
+                    // [ BEIGN ]
+
+                    StringBuilder api_key_StringBuilder = new StringBuilder("Bearer");
+                    api_key_StringBuilder.Append(" ");
+                    api_key_StringBuilder.Append(api_key);
+
+
+                    api_client.DefaultRequestHeaders.Add("Authorization", api_key_StringBuilder.ToString());
+
+
+                    messages messages = new messages();
+                    messages.role = "user";
+                    messages.content = input;
+
+                    cached_conversation.Add(messages);
+
+                    request request = new request();
+                    request.model = model;
+                    request.messages = cached_conversation.ToArray();
+                    request.temperature = temperature;
+
+
+
+
+                    System.Net.Http.StringContent message_content = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
                     try
                     {
-                        JObject? json_response = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(await response.Content.ReadAsStringAsync());
+                        System.Net.Http.HttpResponseMessage response = await api_client.PostAsync("https://api.openai.com/v1/chat/completions", message_content);
 
-                        if(json_response != null)
+                        try
                         {
-                            Tuple<Type, string> payload_processing_result = API_Payload_Processing(json_response);
+                            JObject? json_response = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(await response.Content.ReadAsStringAsync());
 
-                            return_type = payload_processing_result.Item1;
-                            result = payload_processing_result.Item2;
+                            if (json_response != null)
+                            {
+                                Tuple<Type, string> payload_processing_result = API_Payload_Processing(json_response);
+
+                                return_type = payload_processing_result.Item1;
+                                result = payload_processing_result.Item2;
+                            }
+                            else
+                            {
+                                return_type = typeof(Exception);
+                                result = "An error occured";
+                            }
+                        }
+                        catch
+                        {
+                            // IF AN EXCEPTION OCCURS, THEN THE OPERATION
+                            // IS NOT SUCCESSFUL AND THE SET TYPE VALUE
+                            // WITHIN THE TUPLE IS AN EXCEPTION AND THE
+                            // STRING AND THE STRING VALUE IS THE
+                            // ERROR MESSAGE
+
+                            return_type = typeof(Exception);
+                            result = "An error occured";
+                        }
+                        finally
+                        {
+                            if (response != null)
+                            {
+                                response.Dispose();
+                            }
                         }
                     }
                     catch
@@ -103,11 +145,14 @@ namespace SharpGPT
                     }
                     finally
                     {
-                        if (response != null)
+                        if (message_content != null)
                         {
-                            response.Dispose();
+                            message_content.Dispose();
                         }
                     }
+
+
+                    // [ END ]
                 }
                 catch
                 {
@@ -122,35 +167,14 @@ namespace SharpGPT
                 }
                 finally
                 {
-                    if (message_content != null)
+                    if (api_client != null)
                     {
-                        message_content.Dispose();
+                        api_client.Dispose();
                     }
                 }
-
-
-                // [ END ]
-            }
-            catch
-            {
-                // IF AN EXCEPTION OCCURS, THEN THE OPERATION
-                // IS NOT SUCCESSFUL AND THE SET TYPE VALUE
-                // WITHIN THE TUPLE IS AN EXCEPTION AND THE
-                // STRING AND THE STRING VALUE IS THE
-                // ERROR MESSAGE
-
-                return_type = typeof(Exception);
-                result = "An error occured";
-            }
-            finally
-            {
-                if (api_client != null)
-                {
-                    api_client.Dispose();
-                }
             }
 
-            return new Tuple<Type, string>(return_type, result);
+            return new Tuple<Type?, string?>(return_type, result);
         }
 
 

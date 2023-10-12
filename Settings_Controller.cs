@@ -8,6 +8,7 @@ namespace SharpGPT
 {
     internal class Settings_Controller:Settings
     {
+        private static Settings settings = new Settings();
         public enum Operations
         {
             Set_API_Key,
@@ -21,10 +22,10 @@ namespace SharpGPT
             switch(operation)
             {
                 case Operations.Set_API_Key:
-                    Set_ChatGPT_Api_Key(parameter);
+                    settings.Set_ChatGPT_Api_Key(parameter);
                     break;
                 case Operations.Get_API_Key:
-                    return_value = await Get_ChatGPT_Api_Key();
+                    return_value = await settings.Get_ChatGPT_Api_Key();
                     break;
             }
 

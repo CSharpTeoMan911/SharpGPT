@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Teodor Mihail\\Source\\Repos\\SharpGPT\\SharpGPT.csproj": {}
+    "C:\\Users\\Teodor Mihail\\source\\repos\\SharpGPT\\SharpGPT.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Teodor Mihail\\Source\\Repos\\SharpGPT\\SharpGPT.csproj": {
+    "C:\\Users\\Teodor Mihail\\source\\repos\\SharpGPT\\SharpGPT.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Teodor Mihail\\Source\\Repos\\SharpGPT\\SharpGPT.csproj",
+        "projectUniqueName": "C:\\Users\\Teodor Mihail\\source\\repos\\SharpGPT\\SharpGPT.csproj",
         "projectName": "SharpGPT",
-        "projectPath": "C:\\Users\\Teodor Mihail\\Source\\Repos\\SharpGPT\\SharpGPT.csproj",
+        "projectPath": "C:\\Users\\Teodor Mihail\\source\\repos\\SharpGPT\\SharpGPT.csproj",
         "packagesPath": "C:\\Users\\Teodor Mihail\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Teodor Mihail\\Source\\Repos\\SharpGPT\\obj\\",
+        "outputPath": "C:\\Users\\Teodor Mihail\\source\\repos\\SharpGPT\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

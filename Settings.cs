@@ -12,7 +12,7 @@ namespace SharpGPT
         }
 
 
-        protected static async void Set_ChatGPT_Api_Key(string api_key)
+        public async void Set_ChatGPT_Api_Key(string api_key)
         {
             Application_Settings settings = new Application_Settings();
             settings.API_KEY = api_key;
@@ -39,9 +39,9 @@ namespace SharpGPT
             }
         }
 
-        protected static async Task<string> Get_ChatGPT_Api_Key()
+        public async Task<string> Get_ChatGPT_Api_Key()
         {
-            string api_key = String.Empty;
+            string? api_key = String.Empty;
 
             System.IO.FileStream settings_file_stream = System.IO.File.OpenRead(settings_file_name);
             try
