@@ -5,11 +5,12 @@ namespace SharpGPT
     class Program
     {
         private static object dummy_thread_synchronisation_object = new object();
-
         private static int current_console_width = 0;
         private static int current_console_height = 0;
 
         public static Screens current_screen = Screens.Startup_Screen;
+        public static int cursor_location = 0;
+
         public enum Screens
         {
             Startup_Screen,
@@ -20,8 +21,11 @@ namespace SharpGPT
 
         private static void Main()
         {
-            Operation();
-            Console.ReadLine();
+            GUI.Initiatilise_Default_Console_Colours();
+
+            Console.TreatControlCAsInput = true;
+            Console.CursorVisible = false;
+            Task.Run(Operation).Wait();
         }
 
         private static void Operation()
@@ -32,15 +36,35 @@ namespace SharpGPT
             screen_content_adjustment_timer.Start();
 
 
-            while(Console.KeyAvailable == true)
+            while(true)
             {
                 ConsoleKeyInfo cki = Console.ReadKey();
 
                 switch(cki.Key)
                 {
                     case ConsoleKey.UpArrow:
+                        if(cursor_location > 0)
+                        {
+                            cursor_location--;
+                            Operational_Controller.Operation_Selector.Operational_Controller_Method(current_screen);
+                        }
                         break;
                     case ConsoleKey.DownArrow:
+                        if (cursor_location < GUI.Get_Current_Screen_Collection_Size(Screens.Startup_Screen) - 1)
+                        {
+                            cursor_location++;
+                            Operational_Controller.Operation_Selector.Operational_Controller_Method(current_screen);
+                        }
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        break;
+                    case ConsoleKey.RightArrow:
+                        break;
+                    case ConsoleKey.Enter:
+                        Option_Selector();
+                        break;
+                    default:
+                        Operational_Controller.Operation_Selector.Operational_Controller_Method(current_screen);
                         break;
                 }
             }
@@ -72,6 +96,33 @@ namespace SharpGPT
             }
 
             Thread.CurrentThread.Join();
+        }
+
+
+        private static void Option_Selector()
+        {
+
+            switch(current_screen)
+            {
+                case Screens.Startup_Screen:
+                    switch (GUI.Get_Current_Option(Screens.Startup_Screen))
+                    {
+                        case "Start conversation":
+                            break;
+                        case "Load conversation":
+                            break;
+                        case "Settings":
+                            cursor_location = 0;
+                            current_screen = Screens.Settings_Screen;
+                            Operational_Controller.Operation_Selector.Operational_Controller_Method(current_screen);
+                            break;
+                        case "Exit":
+                            Console.Clear();
+                            Environment.Exit(0);
+                            break;
+                    }
+                    break;
+            }
         }
 
 

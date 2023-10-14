@@ -17,13 +17,22 @@ namespace SharpGPT
                     case Program.Screens.Startup_Screen:
                         Initiate_Startup_Screen();
                         break;
+                    case Program.Screens.Settings_Screen:
+                        Initiate_Settings_Screen();
+                        break;
                 }
             }
 
             private static void Initiate_Startup_Screen()
             {
-                Console.Clear();
+                Console.SetCursorPosition(0,0);
                 GUI.Startup_Screen();
+            }
+
+            private static void Initiate_Settings_Screen()
+            {
+                Console.SetCursorPosition(0, 0);
+                GUI.Settings_Screen();
             }
         }
     }
